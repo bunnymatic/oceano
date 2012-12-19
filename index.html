@@ -12,18 +12,8 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
-  var MAPS = window.MAPS = window.MAPS || {};
-  
-  MAPS = {
-    domain: 'https://www.fnmoc.navy.mil/wxmap_cgi/cgi-bin/',
-    prods: [ '500','850','u70','u92','slpw','tas','thk','prp','evap','wav','sgwvht','swlwvht','wndwvht','swlwvdir', 'wndwvdir', 'pkwvdir', 'whitecap'],
-    get_url: function(prod) {
-      return this.domain + "wxmap_loop.cgi?area=27km_epac&prod=" + prod + "&dtg=2012121900&set=SeaState";
-    }
-  };
-</script>
-<style type="text/css">
+        <script src="./oceano.js"></script>
+        <style type="text/css">
   iframe, .caption {
     float:left;
   width: 80%;
@@ -45,21 +35,5 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-
-        
-          <script>
-            $(function() {
-              $.each(MAPS.prods, function(idx, prod) {
-                var url = MAPS.get_url(prod);
-                var $frame = $('<iframe>', {src: url});
-                var $caption = $('<div>').append($('<a>', {href:url}).html(url));
-                var $container = $('<li>');
-                $container.append($frame).append($caption);
-                $('.frames').append($container);
-              });
-            });
-          </script>
-          <ul class="frames">
-          </ul>
     </body>
 </html>
