@@ -64,12 +64,14 @@ MAPS = {
   },
   startCycle:function() {
     this.cycling = setInterval(function(){MAPS.next();}, 500);
+    return false;
   },
   stopCycle:function() {
     if (this.cycling) {
       clearInterval(this.cycling);
       this.cycling = null;
     } 
+    return false;
   }
 
 };
