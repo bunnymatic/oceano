@@ -26,32 +26,35 @@ MAPS = {
     var $stopButton = $('<a>', {href:"#"}).html('stop loop');
     $startButton.bind('click', function() { MAPS.startCycle(); });
     $stopButton.bind('click', function() { MAPS.stopCycle(); });
-    $('body').prepend($stopButton).prepend($startButton);
+    var $ctrls = $('<div>', {'class':'controls'}).append($startButton).append($stopButton);
+    $('body').prepend($ctrls);
   },
   addIframes:function() {
     var that = this;
+    var $listOfFrames = $('<ul>', {'class':'frames'});
     $.each(this.prods, function(idx, prod) {
-      var $listOfFrames = $('<ul>', {'class':'frames'});
       var url = that.getUrl(prod);
       var $frame = $('<iframe>', {src: url});
       var $caption = $('<div>').append($('<a>', {href:url}).html(url));
       var $container = $('<li>');
       $container.append($frame).append($caption);
       listOfFrames.append($container);
-      $('body').append($listOfFrames);
     });
+    $('body').append($listOfFrames);
+
   },
   addImages:function() {
     var that = this;
+    var $listOfImages = $('<ul>', {'class':'images'});
     $.each(this.prods, function(idx, prod) {
-      var $listOfImages = $('<ul>', {'class':'images'});
       var url = that.getImage(prod);
       var $img = $('<img>', {id: that.getImageId(prod), src: url});
       var $container = $('<li>');
       $container.append($img);
       $listOfImages.append($container);
-      $('body').append($listOfImages);
     });
+    $('body').append($listOfImages);
+
   },
   next:function() {
     var that = this;
