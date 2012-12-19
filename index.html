@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+  var MAPS = window.MAPS = window.MAPS || {};
+  
+  MAPS = {
+    domain: 'https://www.fnmoc.navy.mil/wxmap_cgi/cgi-bin/',
+    prods: [ '500','850','u70','u92','slpw','tas','thk','prp','evap','wav','sgwvht','swlwvht','wndwvht','swlwvdir', 'wndwvdir', 'pkwvdir', 'whitecap'],
+    get_url: function(prod) {
+      return this.domain + "wxmap_loop.cgi?area=27km_epac&prod=" + prod + "&dtg=2012121900&set=SeaState";
+    }
+  };
+</script>
+<style type="text/css">
+  iframe, .caption {
+    float:left;
+  width: 80%;
+  margin: auto;
+  height: 500px;
+  }
+  li {
+  margin: 20px;
+  padding:20px;
+  width: 100%;
+  float: left;
+  }
+  ul { list-style:none; }
+</style>    
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        
+          <script>
+            $(function() {
+              $.each(MAPS.prods, function(idx, prod) {
+                var url = MAPS.get_url(prod);
+                var $frame = $('<iframe>', {src: url});
+                var $caption = $('<div>').append($('<a>', {href:url}).html(url));
+                var $container = $('<li>');
+                $container.append($frame).append($caption);
+                $('.frames').append($container);
+              });
+            });
+          </script>
+          <ul class="frames">
+          </ul>
+    </body>
+</html>
